@@ -1,0 +1,10 @@
+# Versión antigua (contiene datos locales; no se publica)
+nuestra_historia.html
+
+# Configuración local del editor
+.claude/
+
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#e05a77">
+<title>Nuestra historia</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💌</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div id="bg" aria-hidden="true"></div><div id="fl" aria-hidden="true"></div>
+
+<button id="gate" type="button" disabled>
+  <span class="em" aria-hidden="true">💌</span>
+  <span class="gp">Un regalo para ti</span>
+  <span class="gh" id="gN"></span>
+  <span class="gp" id="gHint">Cargando…</span>
+</button>
+
+<main id="main">
+  <section class="hero">
+    <div class="tag">Nuestra historia</div>
+    <h1 id="title"></h1>
+    <p class="soft">Llevamos juntos</p>
+    <div class="count" aria-live="off">
+      <div><b id="d">0</b><span>días</span></div>
+      <div><b id="h">0</b><span>horas</span></div>
+      <div><b id="m">0</b><span>minutos</span></div>
+      <div><b id="s">0</b><span>segundos</span></div>
+    </div>
+    <p id="ym" class="soft small"></p>
+  </section>
+  <div class="ph" id="ph1"></div>
+
+  <section id="plsec" hidden>
+    <div class="tag">Nuestra canción</div>
+    <h2>La banda sonora <em>de nosotros</em></h2>
+    <div class="player card">
+      <div class="plh">🎵 <span id="songName">Nuestra canción</span></div>
+      <button class="pbtn" id="pbtn" type="button" aria-label="Reproducir">▶</button>
+      <div class="bar" id="pbarWrap" role="slider" aria-label="Progreso de la canción" tabindex="0"><i id="pbar"></i></div>
+      <div class="vol">🔈<input id="vol" type="range" min="0" max="100" aria-label="Volumen">🔊</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="tag">Mensaje privado</div>
+    <h2>Una carta para <em id="rN"></em></h2>
+    <button class="btn" type="button" id="openLetter">💌 Abrir carta</button>
+  </section>
+  <div class="ph" id="ph2"></div>
+
+  <section>
+    <div class="tag">Con todo mi cariño</div>
+    <h2 id="amaT"></h2>
+    <div class="card"><p id="ama" class="pre"></p></div>
+  </section>
+  <div class="ph" id="ph3"></div>
+
+  <section>
+    <div class="tag">Dónde empezó todo</div>
+    <h2>Nuestros <em>lugares</em></h2>
+    <div class="chips" id="lugares"></div>
+  </section>
+  <div class="ph" id="ph4"></div>
+
+  <section>
+    <div class="tag">Cosas que quiero hacer contigo</div>
+    <h2>Nuestra <em>lista</em></h2>
+    <ul class="list" id="lista"></ul>
+  </section>
+  <div class="ph" id="ph5"></div>
+
+  <section>
+    <div class="tag">Canjéalo cuando quieras</div>
+    <h2>Vales de <em>amor</em></h2>
+    <div class="vales" id="vales"></div>
+    <p class="hint">Cada vale solo se puede usar una vez.</p>
+  </section>
+
+  <section>
+    <div class="tag">Para ti</div>
+    <h2>La ruleta tiene <em>una sorpresa</em></h2>
+    <p class="soft">Gira… y que decida el destino</p>
+    <div class="wheel"><div class="pin" aria-hidden="true">▼</div><div id="wh"></div></div>
+    <button class="btn" type="button" id="spin">Girar</button>
+    <p class="hint" id="lastSpin"></p>
+  </section>
+
+  <section>
+    <div class="tag">Tengo algo que preguntarte</div>
+    <h2 id="q"></h2>
+    <div class="card answer">
+      <label for="resp"><b>Escribe tu respuesta</b></label>
+      <textarea id="resp" maxlength="5000" placeholder="Escribe aquí lo que sientes…"></textarea>
+      <button class="btn" type="button" id="saveResp">Guardar mi respuesta 💌</button>
+      <p class="hint" id="rok" aria-live="polite"></p>
+    </div>
+  </section>
+  <div class="ph" id="ph6"></div>
+
+  <section>
+    <h2 id="cierre" class="pre closing"></h2>
+    <p class="soft">Con cariño<br><b id="firma"></b></p>
+    <div class="tag" style="margin-top:20px">Para siempre ♥</div>
+  </section>
+  <footer>Hecho con amor</footer>
+</main>
+
+<button class="btn fab" id="fab" type="button" hidden>✏️ Editar</button>
+<div id="toasts" aria-live="polite"></div>
+
+<!-- Carta -->
+<div class="mod" id="lm" data-dismiss role="dialog" aria-modal="true" aria-label="Carta">
+  <div class="box">
+    <div class="tag">Mensaje privado</div>
+    <p id="lt" class="letter"></p>
+    <p class="sign">Con amor,<br><b id="lf"></b></p>
+    <button class="btn" type="button" data-close="lm">Cerrar</button>
+  </div>
+</div>
+
+<!-- Resultado ruleta -->
+<div class="mod" id="rm" data-dismiss role="dialog" aria-modal="true" aria-label="Resultado de la ruleta">
+  <div class="box">
+    <div style="font-size:50px" aria-hidden="true">💖</div>
+    <h2>¡Es una cita!</h2>
+    <p id="rs" class="center soft"></p>
+    <button class="btn" type="button" data-close="rm">Cerrar</button>
+  </div>
+</div>
+
+<!-- Foto ampliada -->
+<div class="mod lightbox" id="lb" data-dismiss role="dialog" aria-modal="true" aria-label="Foto">
+  <img id="lbImg" alt="">
+  <button class="btn g lbx" type="button" data-close="lb" aria-label="Cerrar">×</button>
+</div>
+
+<!-- Acceso para editar -->
+<div class="mod" id="login" data-dismiss role="dialog" aria-modal="true" aria-label="Iniciar sesión">
+  <form class="box form" id="loginForm">
+    <h3>🔒 Acceso para editar</h3>
+    <p class="hint">Solo quien creó la página puede modificarla.</p>
+    <label for="l_email">Correo</label><input id="l_email" type="email" autocomplete="username" required>
+    <label for="l_pw">Contraseña</label><input id="l_pw" type="password" autocomplete="current-password" required>
+    <p class="err" id="l_err" aria-live="assertive"></p>
+    <div class="actions"><button class="btn" type="submit" id="l_btn">Entrar</button><button class="btn g" type="button" data-close="login">Cancelar</button></div>
+  </form>
+</div>
+
+<!-- Editor -->
+<div class="mod" id="ed" role="dialog" aria-modal="true" aria-label="Personalizar la página">
+  <div class="box form">
+    <h3>✏️ Personalizar nuestra página</h3>
+    <p class="hint" id="modeHint"></p>
+
+    <details class="answers" open><summary>💌 Lo que ha respondido</summary><div id="answers"></div>
+      <button class="btn g sm" type="button" id="resetVales">Reiniciar vales canjeados</button></details>
+
+    <label for="e_n1">Su nombre (quien recibe)</label><input id="e_n1" maxlength="60">
+    <label for="e_n2">Tu nombre</label><input id="e_n2" maxlength="60">
+    <label for="e_start">Fecha y hora en que empezamos</label><input id="e_start" type="datetime-local">
+    <label>Canción de fondo</label>
+    <div class="slot audio" id="aslot" role="button" tabindex="0"></div>
+    <p class="hint">Suena al abrir la página, en bucle. Máx. 30 MB.</p>
+    <label>Fotos (hasta 6, se reparten por la página)</label>
+    <div class="slots" id="slots"></div>
+    <p class="hint">Se reducen automáticamente para que carguen rápido.</p>
+    <label for="e_carta">Carta</label><textarea id="e_carta" class="tall"></textarea>
+    <label for="e_amaT">Lo que más amo (título y texto)</label><input id="e_amaT"><textarea id="e_ama" style="margin-top:6px" aria-label="Texto de lo que más amo"></textarea>
+    <label for="e_lugares">Nuestros lugares <span class="opt">· uno por línea</span></label><textarea id="e_lugares"></textarea>
+    <label for="e_lista">Nuestra lista <span class="opt">· uno por línea</span></label><textarea id="e_lista"></textarea>
+    <label for="e_vales">Vales de amor <span class="opt">· uno por línea</span></label><textarea id="e_vales"></textarea>
+    <label for="e_ruleta">Opciones de la ruleta <span class="opt">· de 2 a 8, una por línea</span></label><textarea id="e_ruleta"></textarea>
+    <label for="e_pregunta">Pregunta final</label><input id="e_pregunta">
+    <label for="e_cierre">Frase de cierre</label><textarea id="e_cierre" style="min-height:70px"></textarea>
+
+    <details class="more"><summary>Copias de seguridad e importación</summary>
+      <p class="hint">¿Ya personalizaste la versión antigua? Ábrela, pulsa «Exportar versión final» e importa aquí el <code>index.html</code> que descargue.</p>
+      <div class="actions"><button class="btn g sm" type="button" id="importBtn">📥 Importar datos</button><button class="btn g sm" type="button" id="exportBtn">💾 Descargar copia</button><button class="btn g sm" type="button" id="defaultsBtn">↺ Textos por defecto</button></div>
+    </details>
+
+    <div class="actions sticky">
+      <button class="btn" type="button" id="saveEd">Guardar</button>
+      <button class="btn g" type="button" id="cancelEd">Cancelar</button>
+      <button class="btn g" type="button" id="logout" hidden>Cerrar sesión</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
